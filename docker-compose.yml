@@ -58,6 +58,10 @@ php:
     - "mysql:mysql"
   volumes:
     - /code/dockerized-magento:/var/www/html
+    - /code/retailops_magento/app/code/community/RetailOps:/var/www/html/web/app/code/community/RetailOps
+    - /code/retailops_magento/app/design/adminhtml/default/default/layout/retailops.xml:/var/www/html/web/app/design/adminhtml/default/default/layout/retailops.xml
+    - /code/retailops_magento/app/design/adminhtml/default/default/template/retailops:/var/www/html/web/app/design/adminhtml/default/default/template/retailops
+    - /code/retailops_magento/app/etc/modules/RetailOps_Api.xml:/var/www/html/web/app/etc/modules/RetailOps_Api.xml
 mysql:
   image: mysql:5.5
   ports:
