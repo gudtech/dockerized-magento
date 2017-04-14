@@ -74,11 +74,11 @@ During the first start of the project **docker-compose** will
 1. first **build** all docker-images referenced in the [docker-compose.yml](docker-compose.yml)
 2. then **start** the containers
 3. and **trigger the installer** which will
-	- [install magento](docker-images/installer/bin/install.sh) and all modules that are referenced in the [composer.json](composer.json) using `composer` into the web folder
-	- download the [Magento Demo Store Sample Data](http://www.magentocommerce.com/knowledge-base/entry/installing-the-sample-data-for-magento)
-	- copy the files to the magento-root
-	- import the sample database
-	- and finally reindex all indices
+    - [install magento](docker-images/installer/bin/install.sh) and all modules that are referenced in the [composer.json](composer.json) using `composer` into the web folder
+    - download the [Magento Demo Store Sample Data](http://www.magentocommerce.com/knowledge-base/entry/installing-the-sample-data-for-magento)
+    - copy the files to the magento-root
+    - import the sample database
+    - and finally reindex all indices
 
 Once the installation is finished the installer will print the URL and the credentials for the backend to the installer log:
 
@@ -90,7 +90,7 @@ installer_1      |  - Password: pw
 installer_1      |
 installer_1      | Backend: http://dockerized-magento.local/admin
 installer_1      |  - Username: admin
-installer_1      |  - Password: password123
+installer_1      |  - Password: pw
 installer_1      |
 installer_1      | Frontend: http://dockerized-magento.local/
 
@@ -134,7 +134,7 @@ The dockerized Magento project consists of the following components:
   3. a [Solr](docker-images/solr/Dockerfile) search server
   4. a standard [MySQL](https://hub.docker.com/_/mysql/) database server image
   5. multiple instances of the standard [Redis](https://hub.docker.com/_/redis/) docker image
-	6. a standard [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) image that allows you to access the database on port 8080
+    6. a standard [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) image that allows you to access the database on port 8080
   7. and a [Installer](docker-images/installer/Dockerfile) image which contains all tools for installing the project from scratch using an [install script](docker-images/installer/bin/install.sh)
 - a **[shell script](magento)** for controlling the project: [`./magento <action>`](magento)
 - a [composer-file](composer.json) for managing the **Magento modules**
@@ -190,12 +190,12 @@ If you want to install Magento using your own admin-user or change the password,
 installer:
   build: docker-images/installer
   environment:
-		ADMIN_USERNAME: admin
-		ADMIN_FIRSTNAME: Admin
-		ADMIN_LASTNAME: Inistrator
-		ADMIN_PASSWORD: password123
-		ADMIN_FRONTNAME: admin
-		ADMIN_EMAIL: admin@example.com
+        ADMIN_USERNAME: admin
+        ADMIN_FIRSTNAME: Admin
+        ADMIN_LASTNAME: Istrator
+        ADMIN_PASSWORD: pw
+        ADMIN_FRONTNAME: admin
+        ADMIN_EMAIL: admin@example.com
 ```
 
 ### Change the MySQL Root User Password

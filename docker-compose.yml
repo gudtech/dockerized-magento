@@ -9,8 +9,8 @@ installer:
     MYSQL_PASSWORD: pw
     ADMIN_USERNAME: admin
     ADMIN_FIRSTNAME: Admin
-    ADMIN_LASTNAME: Inistrator
-    ADMIN_PASSWORD: password123
+    ADMIN_LASTNAME: Istrator
+    ADMIN_PASSWORD: pw
     ADMIN_FRONTNAME: admin
     ADMIN_EMAIL: admin@example.com
     ENCRYPTIONKEY: 731aea833710535779fe8c7c49bc6c4d
