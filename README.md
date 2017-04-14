@@ -210,3 +210,7 @@ mysql:
   environment:
     MYSQL_ROOT_PASSWORD: <your-mysql-root-user-password>
 ```
+
+### Extension Packaging
+
+Note that if you need to use the Magento extension packaging mechanism, you may run into issues due to directory permissions in shared volumes.  This mechanism copies the requested extension package files into Magento root/var/package/tmp.  Magento creates a directory tree in this location, but the directories get created with 755 permissions due to umask 0022.  This may prevent Magento from being able to copy files into that tree.  A workaround for this is to create the necessary directory tree in var/package/tmp on the host side with 777 permissions on the directories.
