@@ -17,12 +17,12 @@ installer:
   volumes_from:
     - nginx
   volumes:
-    - /code/dockerized-magento/config/installer/php/php.ini:/usr/local/etc/php/php.ini
-    - /code/dockerized-magento/config/installer/magerun/n98-magerun.yaml.tmpl:/etc/n98-magerun.yaml.tmpl
-    - /code/dockerized-magento/config/installer/magento/local.xml.tmpl:/etc/local.xml.tmpl
-    - /code/dockerized-magento/config/installer/magento/fpc.xml.tmpl:/etc/fpc.xml.tmpl
-    - /code/dockerized-magento/config/installer/bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
-    - /code/dockerized-magento/config/installer/bin/install.sh:/bin/install.sh
+    - ./config/installer/php/php.ini:/usr/local/etc/php/php.ini
+    - ./config/installer/magerun/n98-magerun.yaml.tmpl:/etc/n98-magerun.yaml.tmpl
+    - ./config/installer/magento/local.xml.tmpl:/etc/local.xml.tmpl
+    - ./config/installer/magento/fpc.xml.tmpl:/etc/fpc.xml.tmpl
+    - ./config/installer/bin/substitute-env-vars.sh:/bin/substitute-env-vars.sh
+    - ./config/installer/bin/install.sh:/bin/install.sh
   links:
     - "cache:rediscache"
     - "sessions:redissession"
@@ -39,13 +39,13 @@ nginx:
   links:
     - "php"
   volumes:
-    - /code/dockerized-magento/logs/nginx:/var/log/nginx
-    - /code/dockerized-magento/config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
-    - /code/dockerized-magento/config/ssl/cert.key:/etc/nginx/ssl/cert.key
-    - /code/dockerized-magento/config/nginx/nginx.conf:/etc/nginx/nginx.conf
-    - /code/dockerized-magento/config/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf
-    - /code/dockerized-magento/config/nginx/includes:/etc/nginx/includes
-    - /code/dockerized-magento/config/nginx/custom-locations:/etc/nginx/custom-locations
+    - ./logs/nginx:/var/log/nginx
+    - ./config/ssl/cert.pem:/etc/nginx/ssl/cert.pem
+    - ./config/ssl/cert.key:/etc/nginx/ssl/cert.key
+    - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./config/nginx/sites-enabled/default.conf:/etc/nginx/conf.d/default.conf
+    - ./config/nginx/includes:/etc/nginx/includes
+    - ./config/nginx/custom-locations:/etc/nginx/custom-locations
   volumes_from:
     - php
 php:
@@ -57,15 +57,15 @@ php:
     - "solr:solr"
     - "mysql:mysql"
   volumes:
-    - /code/dockerized-magento:/var/www/html
-    - /code/retailops_magento/app/code/community/RetailOps:/var/www/html/web/app/code/community/RetailOps
-    - /code/retailops_magento/app/design/adminhtml/default/default/layout/retailops.xml:/var/www/html/web/app/design/adminhtml/default/default/layout/retailops.xml
-    - /code/retailops_magento/app/design/adminhtml/default/default/template/retailops:/var/www/html/web/app/design/adminhtml/default/default/template/retailops
-    - /code/retailops_magento/app/etc/modules/RetailOps_Api.xml:/var/www/html/web/app/etc/modules/RetailOps_Api.xml
+    - .:/var/www/html
+    - ~/GT/repo/retailops_magento/app/code/community/RetailOps:/var/www/html/web/app/code/community/RetailOps
+    - ~/GT/repo/retailops_magento/app/design/adminhtml/default/default/layout/retailops.xml:/var/www/html/web/app/design/adminhtml/default/default/layout/retailops.xml
+    - ~/GT/repo/retailops_magento/app/design/adminhtml/default/default/template/retailops:/var/www/html/web/app/design/adminhtml/default/default/template/retailops
+    - ~/GT/repo/retailops_magento/app/etc/modules/RetailOps_Api.xml:/var/www/html/web/app/etc/modules/RetailOps_Api.xml
 mysql:
   image: mysql:5.5
   ports:
-    - "3308:3306"
+    - "3306:3306"
   environment:
     MYSQL_ROOT_PASSWORD: pw
 solr:
@@ -84,4 +84,4 @@ phpmyadmin:
     - "mysql:mysql"
   environment:
     PMA_HOST: "mysql"
-    PMA_PORT: 3308
+    PMA_PORT: 3306
